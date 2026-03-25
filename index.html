@@ -55,7 +55,7 @@
     .carousel{position:relative;width:100%;overflow:hidden;height:520px}
     .carousel-track{display:flex;height:100%;transition:transform 0.7s cubic-bezier(0.77,0,0.18,1)}
     .carousel-slide{min-width:100%;height:100%;position:relative;flex-shrink:0}
-    .carousel-slide img{width:100%;height:100%;object-fit:cover;display:block}
+    .carousel-slide img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
     .slide-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-style:italic;color:rgba(255,255,255,0.3);font-size:1rem;letter-spacing:0.08em}
     .s0{background:#2a3540}.s1{background:#2e2a35}.s2{background:#2a3530}.s3{background:#35302a}
     .carousel-slide::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 50%,rgba(0,0,0,0.35) 100%);pointer-events:none}
@@ -152,12 +152,12 @@
   <div class="carousel" aria-label="Photo carousel">
     <div class="carousel-track" id="carouselTrack">
       <div class="carousel-slide">
-        <img src="image0.jpg" alt="Steven and Thu, photo 1" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="slide-placeholder s0" style="display:none">image0.jpg</div>
-      </div>
-      <div class="carousel-slide">
         <img src="image1.jpg" alt="Steven and Thu, photo 2" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
         <div class="slide-placeholder s1" style="display:none">image1.jpg</div>
+      </div>
+      <div class="carousel-slide">
+        <img src="image0.jpg" alt="Steven and Thu, photo 1" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="slide-placeholder s0" style="display:none">image0.jpg</div>
       </div>
       <div class="carousel-slide">
         <img src="image2.jpg" alt="Steven and Thu, photo 3" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
@@ -166,6 +166,22 @@
       <div class="carousel-slide">
         <img src="image3.jpg" alt="Steven and Thu, photo 4" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
         <div class="slide-placeholder s3" style="display:none">image3.jpg</div>
+      </div>
+      <div class="carousel-slide">
+        <img src="image3.jpg" alt="Steven and Thu, photo 5" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="slide-placeholder s4" style="display:none">image4.jpg</div>
+      </div>
+      <div class="carousel-slide">
+        <img src="image3.jpg" alt="Steven and Thu, photo 6" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="slide-placeholder s5" style="display:none">image5.jpg</div>
+      </div>
+      <div class="carousel-slide">
+        <img src="image3.jpg" alt="Steven and Thu, photo 7" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="slide-placeholder s6" style="display:none">image6.jpg</div>
+      </div>
+      <div class="carousel-slide">
+        <img src="image3.jpg" alt="Steven and Thu, photo 8" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="slide-placeholder s7" style="display:none">image7.jpg</div>
       </div>
     </div>
     <button class="carousel-btn prev" id="prevBtn" aria-label="Previous photo">&#8592;</button>
@@ -326,7 +342,7 @@
   document.getElementById('nextBtn').addEventListener('click', function(){ goTo(current + 1); resetAuto(); });
   dots.forEach(function(dot, i) { dot.addEventListener('click', function(){ goTo(i); resetAuto(); }); });
 
-  function startAuto() { autoTimer = setInterval(function(){ goTo(current + 1); }, 4000); }
+  function startAuto() { autoTimer = setInterval(function(){ goTo(current + 1); }, 10000); }
   function resetAuto()  { clearInterval(autoTimer); startAuto(); }
   startAuto();
 
