@@ -52,19 +52,98 @@
 
     /* CAROUSEL */
     #gallery{background:var(--charcoal);padding:0}
-    .carousel{position:relative;width:100%;overflow:hidden;height:520px}
-    .carousel-track{display:flex;height:100%;transition:transform 0.7s cubic-bezier(0.77,0,0.18,1)}
-    .carousel-slide{min-width:100%;height:100%;position:relative;flex-shrink:0}
-    .carousel-slide img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
-    .slide-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-style:italic;color:rgba(255,255,255,0.3);font-size:1rem;letter-spacing:0.08em}
-    .s0{background:#2a3540}.s1{background:#2e2a35}.s2{background:#2a3530}.s3{background:#35302a}
-    .carousel-slide::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 50%,rgba(0,0,0,0.35) 100%);pointer-events:none}
-    .carousel-btn{position:absolute;top:50%;transform:translateY(-50%);z-index:10;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);color:#fff;width:44px;height:44px;border-radius:50%;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(6px);transition:background 0.3s}
-    .carousel-btn:hover{background:rgba(255,255,255,0.25)}
-    .carousel-btn.prev{left:1.5rem}.carousel-btn.next{right:1.5rem}
-    .carousel-dots{position:absolute;bottom:1.2rem;left:50%;transform:translateX(-50%);display:flex;gap:0.5rem;z-index:10}
-    .carousel-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,0.35);border:none;cursor:pointer;transition:background 0.3s,transform 0.3s;padding:0}
-    .carousel-dot.active{background:#fff;transform:scale(1.3)}
+    /* APPLE-STYLE FADE CAROUSEL */
+    .carousel {
+      position: relative;
+      width: 100%;
+      height: 520px;
+      overflow: hidden;
+      background: #000;
+    }
+    
+    .carousel-track {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+    
+    .carousel-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 1.2s ease;
+      z-index: 0;
+    }
+    
+    .carousel-slide.active {
+      opacity: 1;
+      z-index: 1;
+    }
+    
+    .carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      animation: slowZoom 12s ease-in-out infinite;
+    }
+    
+    /* subtle Apple-style zoom */
+    @keyframes slowZoom {
+      0%   { transform: scale(1); }
+      100% { transform: scale(1.08); }
+    }
+    
+    /* overlay gradient */
+    .carousel-slide::after {
+      content:'';
+      position:absolute;
+      inset:0;
+      background:linear-gradient(to bottom,transparent 50%,rgba(0,0,0,0.35));
+    }
+    
+    /* buttons */
+    .carousel-btn {
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      z-index:10;
+      background:rgba(255,255,255,0.15);
+      border:1px solid rgba(255,255,255,0.25);
+      color:#fff;
+      width:44px;
+      height:44px;
+      border-radius:50%;
+      cursor:pointer;
+      backdrop-filter:blur(6px);
+    }
+    
+    .carousel-btn.prev { left:1.5rem; }
+    .carousel-btn.next { right:1.5rem; }
+    
+    /* dots */
+    .carousel-dots {
+      position:absolute;
+      bottom:1.2rem;
+      left:50%;
+      transform:translateX(-50%);
+      display:flex;
+      gap:0.5rem;
+      z-index:10;
+    }
+    
+    .carousel-dot {
+      width:7px;
+      height:7px;
+      border-radius:50%;
+      background:rgba(255,255,255,0.35);
+      border:none;
+      cursor:pointer;
+    }
+    
+    .carousel-dot.active {
+      background:#fff;
+      transform:scale(1.3);
+    }
 
     /* QUOTES */
     #story{background:var(--white)}
@@ -151,47 +230,38 @@
 <section id="gallery">
   <div class="carousel" aria-label="Photo carousel">
     <div class="carousel-track" id="carouselTrack">
-      <div class="carousel-slide">
-        <img src="image1.jpg" alt="Steven and Thu, photo 2" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="slide-placeholder s1" style="display:none">image1.jpg</div>
+
+      <div class="carousel-slide active">
+        <img src="image0.jpg" alt="Photo 1">
       </div>
       <div class="carousel-slide">
-        <img src="image0.jpg" alt="Steven and Thu, photo 1" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="slide-placeholder s0" style="display:none">image0.jpg</div>
+        <img src="image1.jpg" alt="Photo 2">
       </div>
       <div class="carousel-slide">
-        <img src="image2.jpg" alt="Steven and Thu, photo 3" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="slide-placeholder s2" style="display:none">image2.jpg</div>
+        <img src="image2.jpg" alt="Photo 3">
       </div>
       <div class="carousel-slide">
-        <img src="image3.jpg" alt="Steven and Thu, photo 4" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="slide-placeholder s3" style="display:none">image3.jpg</div>
+        <img src="image3.jpg" alt="Photo 4">
       </div>
       <div class="carousel-slide">
-        <img src="image3.jpg" alt="Steven and Thu, photo 5" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="slide-placeholder s4" style="display:none">image4.jpg</div>
+        <img src="image4.jpg" alt="Photo 5">
       </div>
       <div class="carousel-slide">
-        <img src="image3.jpg" alt="Steven and Thu, photo 6" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="slide-placeholder s5" style="display:none">image5.jpg</div>
+        <img src="image5.jpg" alt="Photo 6">
       </div>
       <div class="carousel-slide">
-        <img src="image3.jpg" alt="Steven and Thu, photo 7" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="slide-placeholder s6" style="display:none">image6.jpg</div>
+        <img src="image6.jpg" alt="Photo 7">
       </div>
       <div class="carousel-slide">
-        <img src="image3.jpg" alt="Steven and Thu, photo 8" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="slide-placeholder s7" style="display:none">image7.jpg</div>
+        <img src="image7.jpg" alt="Photo 8">
       </div>
+
     </div>
-    <button class="carousel-btn prev" id="prevBtn" aria-label="Previous photo">&#8592;</button>
-    <button class="carousel-btn next" id="nextBtn" aria-label="Next photo">&#8594;</button>
-    <div class="carousel-dots" id="carouselDots">
-      <button class="carousel-dot active" aria-label="Slide 1"></button>
-      <button class="carousel-dot" aria-label="Slide 2"></button>
-      <button class="carousel-dot" aria-label="Slide 3"></button>
-      <button class="carousel-dot" aria-label="Slide 4"></button>
-    </div>
+
+    <button class="carousel-btn prev">&#8592;</button>
+    <button class="carousel-btn next">&#8594;</button>
+
+    <div class="carousel-dots" id="carouselDots"></div>
   </div>
 </section>
 
@@ -326,36 +396,65 @@
 </footer>
 
 <script>
-  const track = document.getElementById('carouselTrack');
-  const dots  = document.querySelectorAll('.carousel-dot');
-  const total = 4;
+  const slides = document.querySelectorAll('.carousel-slide');
+  const dotsContainer = document.getElementById('carouselDots');
+  const prevBtn = document.querySelector('.carousel-btn.prev');
+  const nextBtn = document.querySelector('.carousel-btn.next');
+
   let current = 0;
-  let autoTimer;
+  let timer;
+
+  // create dots dynamically
+  slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.classList.add('carousel-dot');
+    if (i === 0) dot.classList.add('active');
+    dot.addEventListener('click', () => {
+      goTo(i);
+      resetAuto();
+    });
+    dotsContainer.appendChild(dot);
+  });
+
+  const dots = document.querySelectorAll('.carousel-dot');
 
   function goTo(index) {
-    current = (index + total) % total;
-    track.style.transform = 'translateX(-' + (current * 100) + '%)';
-    dots.forEach(function(d, i) { d.classList.toggle('active', i === current); });
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+
+    current = (index + slides.length) % slides.length;
+
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
   }
 
-  document.getElementById('prevBtn').addEventListener('click', function(){ goTo(current - 1); resetAuto(); });
-  document.getElementById('nextBtn').addEventListener('click', function(){ goTo(current + 1); resetAuto(); });
-  dots.forEach(function(dot, i) { dot.addEventListener('click', function(){ goTo(i); resetAuto(); }); });
+  prevBtn.addEventListener('click', () => {
+    goTo(current - 1);
+    resetAuto();
+  });
 
-  function startAuto() { autoTimer = setInterval(function(){ goTo(current + 1); }, 10000); }
-  function resetAuto()  { clearInterval(autoTimer); startAuto(); }
+  nextBtn.addEventListener('click', () => {
+    goTo(current + 1);
+    resetAuto();
+  });
+
+  function startAuto() {
+    timer = setInterval(() => {
+      goTo(current + 1);
+    }, 5000);
+  }
+
+  function resetAuto() {
+    clearInterval(timer);
+    startAuto();
+  }
+
   startAuto();
 
-  var carousel = document.querySelector('.carousel');
-  carousel.addEventListener('mouseenter', function(){ clearInterval(autoTimer); });
+  // pause on hover
+  const carousel = document.querySelector('.carousel');
+  carousel.addEventListener('mouseenter', () => clearInterval(timer));
   carousel.addEventListener('mouseleave', startAuto);
-
-  var touchStartX = 0;
-  track.addEventListener('touchstart', function(e){ touchStartX = e.touches[0].clientX; }, { passive: true });
-  track.addEventListener('touchend', function(e){
-    var diff = touchStartX - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 40) { goTo(diff > 0 ? current + 1 : current - 1); resetAuto(); }
-  });
 </script>
 </body>
 </html>
