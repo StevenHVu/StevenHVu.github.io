@@ -111,7 +111,11 @@
         rgba(0,0,0,0.25) 100%
       );
     }
-    
+
+    .carousel-slide.portrait img {
+      object-fit: contain;
+      background: #000; /* fills empty space nicely */
+    }
     /* buttons */
     .carousel-btn {
       position:absolute;
@@ -482,6 +486,24 @@
       resetAuto();
     }
   });
+
+  // detect image orientation automatically
+slides.forEach(slide => {
+  const img = slide.querySelector('img');
+
+  img.onload = () => {
+    if (img.naturalHeight > img.naturalWidth) {
+      slide.classList.add('portrait');
+    }
+  };
+
+  // handle cached images
+  if (img.complete) {
+    if (img.naturalHeight > img.naturalWidth) {
+      slide.classList.add('portrait');
+    }
+  }
+});
 </script>
 </body>
 </html>
