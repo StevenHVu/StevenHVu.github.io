@@ -91,13 +91,13 @@
     }
 
     .carousel-slide.active img {
-      transform: scale(1.08);
+      animation: slowZoom 6s ease forwards;
     }
     
     /* subtle Apple-style zoom */
     @keyframes slowZoom {
-      0%   { transform: scale(1); }
-      100% { transform: scale(1.08); }
+      from   { transform: scale(1); }
+      to { transform: scale(1.08); }
     }
     
     /* overlay gradient */
@@ -433,12 +433,21 @@
   const dots = document.querySelectorAll('.carousel-dot');
 
   function goTo(index) {
-    slides[current].classList.remove('active');
+    const prevSlide = slides[current];
+    const nextIndex = (index + slides.length) % slides.length;
+    const nextSlide = slides[nextIndex];
+  
+    const img = nextSlide.querySelector('img');
+    img.style.animation = 'none';
+    img.offsetHeight;
+    img.style.animation = '';
+  
+    prevSlide.classList.remove('active');
     dots[current].classList.remove('active');
-
-    current = (index + slides.length) % slides.length;
-
-    slides[current].classList.add('active');
+  
+    current = nextIndex;
+  
+    nextSlide.classList.add('active');
     dots[current].classList.add('active');
   }
 
@@ -452,10 +461,18 @@
     resetAuto();
   });
 
+  window.addEventListener('load', () => {
+    slides[0].classList.remove('active');
+  
+    requestAnimationFrame(() => {
+      slides[0].classList.add('active');
+    });
+  });
+  
   function startAuto() {
     timer = setInterval(() => {
       goTo(current + 1);
-    }, 5000);
+    }, 6000);
   }
 
   function resetAuto() {
