@@ -1,509 +1,248 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Steven &amp; Thu — October 10, 2026</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;1,300;1,400&family=Nunito:wght@200;300;400&display=swap" rel="stylesheet">
-  <style>
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    :root{
-      --white:#ffffff;--off-white:#f9fbfe;
-      --sky:#a8cfe8;--sky-light:#daedf8;--sky-pale:#edf6fc;--sky-dark:#5a9ec4;
-      --pink:#f2b8c6;--pink-light:#fce8ee;--pink-dark:#d47a93;
-      --charcoal:#2a2a2a;--mid:#666;
-      --serif:'Playfair Display',Georgia,serif;
-      --sans:'Nunito',sans-serif;
-    }
-    html{scroll-behavior:smooth}
-    body{background:var(--white);color:var(--charcoal);font-family:var(--sans);font-weight:300;overflow-x:hidden}
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Steven & Thu — October 10, 2026</title>
 
-    /* NAV */
-    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:center;gap:2.8rem;padding:1.1rem 2rem;background:rgba(255,255,255,0.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--sky-light);font-size:0.68rem;letter-spacing:0.22em;text-transform:uppercase}
-    nav a{text-decoration:none;color:var(--mid);transition:color 0.3s}
-    nav a:hover{color:var(--sky-dark)}
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;1,300;1,400&family=Nunito:wght@200;300;400&display=swap" rel="stylesheet">
 
-    /* HERO */
-    #hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8rem 2rem 6rem;position:relative;overflow:hidden;background:var(--off-white)}
-    #hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 20% 30%,rgba(168,207,232,0.25) 0%,transparent 70%),radial-gradient(ellipse 50% 45% at 80% 70%,rgba(242,184,198,0.25) 0%,transparent 70%);pointer-events:none}
-    #hero::after{content:'';position:absolute;width:580px;height:580px;top:50%;left:50%;transform:translate(-50%,-50%);border-radius:50%;border:1px solid rgba(168,207,232,0.35);pointer-events:none}
-    .hero-eyebrow{font-size:0.68rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--sky-dark);margin-bottom:1.8rem;animation:fadeUp 1s ease both}
-    .hero-names{font-family:var(--serif);font-size:clamp(4rem,11vw,8.5rem);font-weight:300;line-height:0.95;color:var(--charcoal);animation:fadeUp 1s 0.15s ease both}
-    .hero-names .amp{display:block;font-style:italic;font-size:0.5em;color:var(--pink-dark);line-height:1.6;letter-spacing:0.05em}
-    .hero-rule{display:flex;align-items:center;gap:1.2rem;margin:2.2rem auto;width:260px;animation:fadeUp 1s 0.3s ease both}
-    .hero-rule span{flex:1;height:1px;background:linear-gradient(to right,transparent,var(--sky),transparent)}
-    .hero-rule .dot{width:6px;height:6px;border-radius:50%;background:var(--pink);flex-shrink:0}
-    .hero-date{font-family:var(--serif);font-size:1.25rem;font-weight:300;letter-spacing:0.15em;color:var(--mid);animation:fadeUp 1s 0.4s ease both}
-    .hero-venue{font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--sky-dark);margin-top:0.5rem;animation:fadeUp 1s 0.5s ease both}
-    .hero-cta{margin-top:3rem;animation:fadeUp 1s 0.65s ease both}
-    .btn{display:inline-block;padding:0.85rem 2.6rem;border:1px solid var(--sky-dark);color:var(--sky-dark);text-decoration:none;font-family:var(--sans);font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;transition:background 0.3s,color 0.3s;background:transparent;cursor:pointer}
-    .btn:hover{background:var(--sky-dark);color:#fff}
-    @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
-    /* SECTIONS */
-    section{padding:6rem 2rem}
-    .section-inner{max-width:820px;margin:0 auto}
-    .section-label{font-size:0.65rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--sky-dark);margin-bottom:0.8rem}
-    .section-title{font-family:var(--serif);font-size:clamp(2rem,5vw,3.2rem);font-weight:300;line-height:1.2;margin-bottom:1.4rem}
-    .section-title em{font-style:italic;color:var(--pink-dark)}
-    .section-body{font-size:0.97rem;line-height:1.9;color:var(--mid)}
+:root{
+--white:#ffffff;--off-white:#f9fbfe;
+--sky:#a8cfe8;--sky-light:#daedf8;--sky-pale:#edf6fc;--sky-dark:#5a9ec4;
+--pink:#f2b8c6;--pink-light:#fce8ee;--pink-dark:#d47a93;
+--charcoal:#2a2a2a;--mid:#666;
+--serif:'Playfair Display',Georgia,serif;
+--sans:'Nunito',sans-serif;
+}
 
-    /* CAROUSEL */
-    #gallery{background:var(--charcoal);padding:0}
-    /* APPLE-STYLE FADE CAROUSEL */
-    .carousel {
-      position: relative;
-      width: 100%;
-      height: 520px;
-      overflow: hidden;
-      background: radial-gradient(circle at center, #111 0%, #000 100%);
-    }
-    
-    .carousel-track {
-      position: relative;
-      width: 100%;
-      height: 100%;
-    }
-    
-    .carousel-slide {
-      position: absolute;
-      inset: 0;
-      opacity: 0;
-      transition: opacity 1.4s cubic-bezier(0.4, 0, 0.2, 1);
-      z-index: 0;
-      pointer-events: none;
-    }
-    
-    .carousel-slide.active {
-      opacity: 1;
-      z-index: 1;
-      pointer-events: auto;
-    }
-    
-    .carousel-slide img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transform: scale(1);
-      transition: transform 6s ease;  
-    }
+body{font-family:var(--sans);background:#fff;color:#2a2a2a}
 
-    .carousel-slide.active img {
-      transform: scale(1.08);
-    }
-    
-    /* subtle Apple-style zoom */
-    @keyframes slowZoom {
-      0%   { transform: scale(1); }
-      100% { transform: scale(1.08); }
-    }
-    
-    /* overlay gradient */
-    .carousel-slide::after {
-      content:'';
-      position:absolute;
-      inset:0;
-      background:linear-gradient(
-        to bottom,
-        rgba(0,0,0,0) 40%,
-        rgba(0,0,0,0.25) 100%
-      );
-    }
+/* HERO (unchanged simplified) */
+#hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.hero-names{font-family:var(--serif);font-size:4rem}
 
-    .carousel-slide.portrait img {
-      object-fit: contain;
-      background: #000; /* fills empty space nicely */
-    }
-    /* buttons */
-    .carousel-btn {
-      position:absolute;
-      top:50%;
-      transform:translateY(-50%);
-      z-index:10;
-      background:rgba(255,255,255,0.15);
-      border:1px solid rgba(255,255,255,0.25);
-      color:#fff;
-      width:44px;
-      height:44px;
-      border-radius:50%;
-      cursor:pointer;
-      backdrop-filter:blur(6px);
-    }
-    
-    .carousel-btn.prev { left:1.5rem; }
-    .carousel-btn.next { right:1.5rem; }
-    
-    /* dots */
-    .carousel-dots {
-      position:absolute;
-      bottom:1.2rem;
-      left:50%;
-      transform:translateX(-50%);
-      display:flex;
-      gap:0.5rem;
-      z-index:10;
-    }
-    
-    .carousel-dot {
-      width:7px;
-      height:7px;
-      border-radius:50%;
-      background:rgba(255,255,255,0.35);
-      border:none;
-      cursor:pointer;
-    }
-    
-    .carousel-dot.active {
-      background:#fff;
-      transform:scale(1.3);
-    }
+/* =========================
+   ✨ FIXED CAROUSEL
+   ========================= */
 
-    /* QUOTES */
-    #story{background:var(--white)}
-    .story-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;margin-top:3rem}
-    .quote-card{padding:2rem;border-top:2px solid var(--sky-light);position:relative}
-    .quote-card.pink-top{border-top-color:var(--pink)}
-    .quote-mark{font-family:var(--serif);font-size:4rem;color:var(--sky-light);line-height:0.5;margin-bottom:1rem;display:block}
-    .quote-card.pink-top .quote-mark{color:var(--pink-light)}
-    .quote-text{font-family:var(--serif);font-size:1.0rem;font-style:italic;line-height:1.8;color:var(--charcoal);margin-bottom:1.2rem}
-    .quote-author{font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--sky-dark)}
-    .quote-card.pink-top .quote-author{color:var(--pink-dark)}
-    .quote-placeholder{color:rgba(212,122,147,0.4)}
+#gallery{background:#000}
 
-    /* SCHEDULE */
-    #schedule{background:var(--sky-pale)}
-    .schedule-list{margin-top:3rem;display:flex;flex-direction:column}
-    .schedule-item{display:grid;grid-template-columns:130px 1fr;gap:2rem;padding:2rem 0;border-bottom:1px solid rgba(168,207,232,0.4);align-items:start}
-    .schedule-item:first-child{border-top:1px solid rgba(168,207,232,0.4)}
-    .sched-time{font-family:var(--serif);font-size:1.3rem;font-weight:300;color:var(--sky-dark);padding-top:0.15rem}
-    .sched-content h3{font-family:var(--serif);font-size:1.4rem;font-weight:300;margin-bottom:0.35rem}
-    .sched-content p{font-size:0.88rem;line-height:1.7;color:var(--mid)}
-    .sched-tag{display:inline-block;margin-top:0.6rem;font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;background:var(--pink-light);color:var(--pink-dark);padding:0.25rem 0.7rem}
-    .sched-address{display:block;margin-top:0.4rem;font-size:0.82rem;color:var(--mid);font-style:italic;line-height:1.6}
+.carousel {
+  position: relative;
+  width: 100%;
+  height: 520px;
+  overflow: hidden;
+}
 
-    /* DRESS CODE */
-    #dresscode{background:linear-gradient(135deg,var(--sky-pale) 0%,var(--pink-light) 100%);text-align:center}
-    #dresscode .section-inner{max-width:560px}
-    .dress-chips{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:2rem}
-    .dress-chip{padding:0.55rem 1.4rem;border:1px solid rgba(90,158,196,0.35);font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--sky-dark);background:rgba(255,255,255,0.55)}
+.carousel-track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
 
-    /* RSVP */
-    #rsvp{background:var(--white);text-align:center}
-    #rsvp .section-inner{max-width:540px}
-    #rsvp .section-body{margin:0 auto 2.5rem}
-    .rsvp-form{display:flex;flex-direction:column;gap:1rem;text-align:left}
-    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-    .form-group{display:flex;flex-direction:column;gap:0.4rem}
-    .form-group label{font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid)}
-    .form-group input,.form-group select,.form-group textarea{background:var(--off-white);border:1px solid var(--sky-light);padding:0.8rem 1rem;font-family:var(--sans);font-size:0.9rem;color:var(--charcoal);outline:none;transition:border-color 0.3s;width:100%;-webkit-appearance:none}
-    .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--sky-dark)}
-    .form-group textarea{resize:vertical;min-height:85px}
-    .btn-submit{background:var(--sky-dark);color:#fff;border:none;padding:1rem 3rem;font-family:var(--sans);font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;transition:background 0.3s;align-self:center}
-    .btn-submit:hover{background:var(--sky)}
+.carousel-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.4s ease;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
 
-    /* FOOTER */
-    footer{background:var(--charcoal);color:rgba(255,255,255,0.4);text-align:center;padding:3.5rem 2rem;font-size:0.72rem;letter-spacing:0.12em}
-    .footer-names{font-family:var(--serif);font-size:2.2rem;font-weight:300;color:rgba(255,255,255,0.88);margin-bottom:0.5rem}
-    .footer-names em{font-style:italic;color:var(--pink)}
-    .footer-rule{width:60px;height:1px;background:linear-gradient(to right,var(--sky),var(--pink));margin:1.2rem auto}
+/* active */
+.carousel-slide.active {
+  opacity: 1;
+  z-index: 1;
+}
 
-    @media(max-width:660px){
-      nav{gap:1.4rem;font-size:0.6rem}
-      .story-grid{grid-template-columns:1fr}
-      .form-row{grid-template-columns:1fr}
-      .schedule-item{grid-template-columns:1fr;gap:0.3rem}
-      .carousel{height:320px}
-    }
-  </style>
+/* image */
+.carousel-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 6s ease;
+}
+
+.carousel-slide.active img {
+  transform: scale(1.08);
+}
+
+/* portrait fix */
+.carousel-slide.portrait img {
+  object-fit: contain;
+  z-index: 2;
+}
+
+/* blurred bg */
+.carousel-slide::before {
+  content:'';
+  position:absolute;
+  inset:0;
+  background-image: var(--bg);
+  background-size: cover;
+  background-position: center;
+  filter: blur(35px) scale(1.2);
+  opacity:0;
+  transition:opacity .5s;
+}
+
+.carousel-slide.portrait::before {
+  opacity:.6;
+}
+
+/* overlay */
+.carousel-slide::after{
+content:'';
+position:absolute;
+inset:0;
+background:linear-gradient(to bottom,transparent 40%,rgba(0,0,0,.25));
+}
+
+/* buttons */
+.carousel-btn{
+position:absolute;
+top:50%;
+transform:translateY(-50%);
+width:44px;height:44px;
+border-radius:50%;
+border:1px solid rgba(255,255,255,.3);
+background:rgba(255,255,255,.15);
+color:#fff;
+cursor:pointer;
+}
+
+.prev{left:20px}
+.next{right:20px}
+
+/* dots */
+.carousel-dots{
+position:absolute;
+bottom:15px;
+left:50%;
+transform:translateX(-50%);
+display:flex;
+gap:6px;
+}
+
+.carousel-dot{
+width:7px;height:7px;
+border-radius:50%;
+background:rgba(255,255,255,.4);
+border:none;
+cursor:pointer;
+}
+
+.carousel-dot.active{
+background:#fff;
+transform:scale(1.3);
+}
+
+</style>
 </head>
+
 <body>
 
-<nav>
-  <a href="#story">Our Story</a>
-  <a href="#schedule">Schedule</a>
-  <a href="#dresscode">Dress Code</a>
-  <a href="#rsvp">RSVP</a>
-</nav>
-
 <section id="hero">
-  <p class="hero-eyebrow">Together at last</p>
-  <h1 class="hero-names">
-    Steven
-    <span class="amp">&amp;</span>
-    Thu
-  </h1>
-  <div class="hero-rule">
-    <span></span><div class="dot"></div><span></span>
-  </div>
-  <p class="hero-date">October 10, 2026</p>
-  <p class="hero-venue">Hoa Vien Kim Bich · Đồng Nai, Vietnam</p>
-  <div class="hero-cta"><a href="#rsvp" class="btn">Kindly Reply</a></div>
+  <h1 class="hero-names">Steven & Thu</h1>
+  <p>October 10, 2026</p>
 </section>
 
 <section id="gallery">
-  <div class="carousel" aria-label="Photo carousel">
-    <div class="carousel-track" id="carouselTrack">
+  <div class="carousel">
 
-      <div class="carousel-slide active">
-        <img src="image0.jpg" alt="Photo 1">
-      </div>
-      <div class="carousel-slide">
-        <img src="image1.jpg" alt="Photo 2">
-      </div>
-      <div class="carousel-slide">
-        <img src="image2.jpg" alt="Photo 3">
-      </div>
-      <div class="carousel-slide">
-        <img src="image3.jpg" alt="Photo 4">
-      </div>
-      <div class="carousel-slide">
-        <img src="image4.jpg" alt="Photo 5">
-      </div>
-      <div class="carousel-slide">
-        <img src="image5.jpg" alt="Photo 6">
-      </div>
-      <div class="carousel-slide">
-        <img src="image6.jpg" alt="Photo 7">
-      </div>
-      <div class="carousel-slide">
-        <img src="image7.jpg" alt="Photo 8">
-      </div>
+    <div class="carousel-track">
+
+      <div class="carousel-slide active"><img src="image0.jpg"></div>
+      <div class="carousel-slide"><img src="image1.jpg"></div>
+      <div class="carousel-slide"><img src="image2.jpg"></div>
+      <div class="carousel-slide"><img src="image3.jpg"></div>
+      <div class="carousel-slide"><img src="image4.jpg"></div>
+      <div class="carousel-slide"><img src="image5.jpg"></div>
+      <div class="carousel-slide"><img src="image6.jpg"></div>
+      <div class="carousel-slide"><img src="image7.jpg"></div>
 
     </div>
 
     <button class="carousel-btn prev">&#8592;</button>
     <button class="carousel-btn next">&#8594;</button>
 
-    <div class="carousel-dots" id="carouselDots"></div>
+    <div class="carousel-dots" id="dots"></div>
+
   </div>
 </section>
-
-<section id="story">
-  <div class="section-inner">
-    <p class="section-label" style="text-align:center">Our Story</p>
-    <h2 class="section-title" style="text-align:center">In their own <em>words</em></h2>
-    <div class="story-grid">
-      <div class="quote-card">
-        <span class="quote-mark">"</span>
-        <p class="quote-text">I knew Thu was the one for me when I realized I wasn't pretending to be someone else or revealing a fragment of my inner self. I found someone that I was comfortable being genuine with, both with my thoughts and with my actions. I could completely be weird, messy, and emotional, and Thu would always care and love me more for it.</p>
-        <p class="quote-author">Steven</p>
-      </div>
-      <div class="quote-card pink-top">
-        <span class="quote-mark">"</span>
-        <p class="quote-text quote-placeholder">Thu's words are on their way...</p>
-        <p class="quote-author" style="color:rgba(212,122,147,0.4)">Thu</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="schedule">
-  <div class="section-inner">
-    <p class="section-label">The Day</p>
-    <h2 class="section-title">Day <em>Schedule</em></h2>
-    <p class="section-body">Join us for a full day of celebration, from a sacred morning mass to an afternoon of feasting, joy, and dancing.</p>
-    <div class="schedule-list">
-      <div class="schedule-item">
-        <div class="sched-time">8:30 AM</div>
-        <div class="sched-content">
-          <h3>Wedding Mass</h3>
-          <p>A sacred ceremony to bless the beginning of our life together. Please arrive a few minutes early.</p>
-          <span class="sched-address">Nhà thờ Giáo xứ Kim Bích<br>Đường Khu Phố 2, Nguyễn Ái Quốc, Hố Nai, Long Bình, Đồng Nai</span>
-          <span class="sched-tag">Church Ceremony</span>
-        </div>
-      </div>
-      <div class="schedule-item">
-        <div class="sched-time">11:00 AM</div>
-        <div class="sched-content">
-          <h3>Reception Begins</h3>
-          <p>Doors open. Come hungry, come happy.</p>
-          <span class="sched-address">Hoa Vien Kim Bich<br>Khu Phố 4, Long Bình, Đồng Nai, Vietnam</span>
-          <span class="sched-tag">Lunch and Celebration</span>
-        </div>
-      </div>
-      <div class="schedule-item">
-        <div class="sched-time">1:00 PM</div>
-        <div class="sched-content">
-          <h3>End of Celebration</h3>
-          <p>Thank you for celebrating with us. We are so grateful to have shared this day with you.</p>
-          <span class="sched-tag">Close of Event</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="dresscode">
-  <div class="section-inner">
-    <p class="section-label">What to Wear</p>
-    <h2 class="section-title">Dress <em>Freely</em></h2>
-    <p class="section-body">No strict dress code here. Come as you feel most wonderful. Whether you go formal, semi-formal, or casual, all that matters is that you are comfortable and ready to celebrate with us.</p>
-    <div class="dress-chips">
-      <div class="dress-chip">Formal</div>
-      <div class="dress-chip">Semi-formal</div>
-      <div class="dress-chip">Casual</div>
-      <div class="dress-chip">Whatever makes you happy ✨</div>
-    </div>
-  </div>
-</section>
-
-<section id="rsvp">
-  <div class="section-inner">
-    <p class="section-label">Kindly Reply</p>
-    <h2 class="section-title">Will you <em>join us?</em></h2>
-    <p class="section-body">Please let us know you are coming. We cannot wait to celebrate with you.</p>
-    <!--
-      To activate this form:
-      1. Sign up free at formspree.io
-      2. Create a new form and copy your form ID
-      3. Replace YOUR_FORM_ID below
-    -->
-    <form class="rsvp-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-      <div class="form-row">
-        <div class="form-group">
-          <label for="fname">First Name</label>
-          <input type="text" id="fname" name="first_name" placeholder="Your name" required>
-        </div>
-        <div class="form-group">
-          <label for="lname">Last Name</label>
-          <input type="text" id="lname" name="last_name" placeholder="Your surname" required>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="your@email.com" required>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label for="attending">Attending?</label>
-          <select id="attending" name="attending" required>
-            <option value="" disabled selected>Please select</option>
-            <option value="yes">Joyfully accepts</option>
-            <option value="no">Regretfully declines</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="guests">Number of Guests</label>
-          <select id="guests" name="guests">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="message">A Note for the Couple</label>
-        <textarea id="message" name="message" placeholder="Leave us a warm wish..."></textarea>
-      </div>
-      <button type="submit" class="btn-submit">Send RSVP</button>
-    </form>
-  </div>
-</section>
-
-<footer>
-  <p class="footer-names">Steven <em>&amp;</em> Thu</p>
-  <div class="footer-rule"></div>
-  <p>October 10, 2026 &nbsp;·&nbsp; Hoa Vien Kim Bich, Đồng Nai, Vietnam</p>
-  <p style="margin-top:0.6rem">Made with love and HTML</p>
-</footer>
 
 <script>
-  const slides = document.querySelectorAll('.carousel-slide');
-  const dotsContainer = document.getElementById('carouselDots');
-  const prevBtn = document.querySelector('.carousel-btn.prev');
-  const nextBtn = document.querySelector('.carousel-btn.next');
+const slides = document.querySelectorAll('.carousel-slide');
+const dotsContainer = document.getElementById('dots');
+const prevBtn = document.querySelector('.prev');
+const nextBtn = document.querySelector('.next');
 
-  let current = 0;
-  let timer;
+let current = 0;
+let timer;
 
-  // create dots dynamically
-  slides.forEach((_, i) => {
-    const dot = document.createElement('button');
-    dot.classList.add('carousel-dot');
-    if (i === 0) dot.classList.add('active');
-    dot.addEventListener('click', () => {
-      goTo(i);
-      resetAuto();
-    });
-    dotsContainer.appendChild(dot);
-  });
+/* setup */
+slides.forEach((slide, i) => {
 
-  const dots = document.querySelectorAll('.carousel-dot');
-
-  function goTo(index) {
-    slides[current].classList.remove('active');
-    dots[current].classList.remove('active');
-
-    current = (index + slides.length) % slides.length;
-
-    slides[current].classList.add('active');
-    dots[current].classList.add('active');
-  }
-
-  prevBtn.addEventListener('click', () => {
-    goTo(current - 1);
-    resetAuto();
-  });
-
-  nextBtn.addEventListener('click', () => {
-    goTo(current + 1);
-    resetAuto();
-  });
-
-  function startAuto() {
-    timer = setInterval(() => {
-      goTo(current + 1);
-    }, 5000);
-  }
-
-  function resetAuto() {
-    clearInterval(timer);
-    startAuto();
-  }
-
-  startAuto();
-
-  // pause on hover
-  const carousel = document.querySelector('.carousel');
-  carousel.addEventListener('mouseenter', () => clearInterval(timer));
-  carousel.addEventListener('mouseleave', startAuto);
-
-  let startX = 0;
-  
-  const carouselEl = document.querySelector('.carousel');
-  
-  carouselEl.addEventListener('touchstart', e => {
-    startX = e.touches[0].clientX;
-  }, { passive: true });
-  
-  carouselEl.addEventListener('touchend', e => {
-    const diff = startX - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 40) {
-      goTo(diff > 0 ? current + 1 : current - 1);
-      resetAuto();
-    }
-  });
-
-  // detect image orientation automatically
-slides.forEach(slide => {
   const img = slide.querySelector('img');
+  const src = img.getAttribute('src');
 
-  img.onload = () => {
-    if (img.naturalHeight > img.naturalWidth) {
+  slide.style.setProperty('--bg', `url(${src})`);
+
+  const dot = document.createElement('button');
+  dot.classList.add('carousel-dot');
+  if(i===0) dot.classList.add('active');
+
+  dot.onclick = () => {
+    goTo(i);
+    reset();
+  };
+
+  dotsContainer.appendChild(dot);
+
+  const check = () => {
+    if(img.naturalHeight > img.naturalWidth){
       slide.classList.add('portrait');
     }
   };
 
-  // handle cached images
-  if (img.complete) {
-    if (img.naturalHeight > img.naturalWidth) {
-      slide.classList.add('portrait');
-    }
-  }
+  if(img.complete) check();
+  else img.onload = check;
 });
+
+const dots = document.querySelectorAll('.carousel-dot');
+
+/* nav */
+function goTo(i){
+  slides[current].classList.remove('active');
+  dots[current].classList.remove('active');
+
+  current = (i + slides.length) % slides.length;
+
+  slides[current].classList.add('active');
+  dots[current].classList.add('active');
+}
+
+prevBtn.onclick = () => { goTo(current-1); reset(); }
+nextBtn.onclick = () => { goTo(current+1); reset(); }
+
+/* autoplay */
+function start(){
+  timer = setInterval(()=>goTo(current+1),5000);
+}
+
+function reset(){
+  clearInterval(timer);
+  start();
+}
+
+start();
 </script>
+
 </body>
 </html>
