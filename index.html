@@ -21,7 +21,7 @@
     body{background:var(--white);color:var(--charcoal);font-family:var(--sans);font-weight:300;overflow-x:hidden}
 
     /* NAV */
-    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:center;gap:2.8rem;padding:1.1rem 2rem;background:rgba(255,255,255,0.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--sky-light);font-size:1.2rem;letter-spacing:0.22em;text-transform:uppercase}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:center;gap:2.8rem;padding:1.1rem 2rem;background:rgba(255,255,255,0.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--sky-light);font-size:1.0rem;letter-spacing:0.22em;text-transform:uppercase}
     nav a{text-decoration:none;color:var(--mid);transition:color 0.3s}
     nav a:hover{color:var(--sky-dark)}
 
@@ -128,6 +128,7 @@
       animation: continuousZoom 180s ease-in-out infinite;
     }
     
+    /* Zoom goes from 1.0 to 1.12, then back to 1.0, forever */
     @keyframes continuousZoom {
       0%   { transform: scale(1.00); }
       13%   { transform: scale(1.12); }
@@ -219,7 +220,7 @@
     .schedule-item:first-child{border-top:1px solid rgba(168,207,232,0.4)}
     .sched-time{font-family:var(--serif);font-size:1.8rem;font-weight:300;color:var(--sky-dark);padding-top:0.15rem}
     .sched-content h3{font-family:var(--serif);font-size:1.5rem;font-weight:300;margin-bottom:0.35rem}
-    .sched-content p{font-size:1.3rem;line-height:1.7;color:var(--mid)}
+    .sched-content p{font-size:1.1rem;line-height:1.7;color:var(--mid)}
     .sched-tag{display:inline-block;margin-top:0.6rem;font-size:1rem;letter-spacing:0.18em;text-transform:uppercase;background:var(--pink-light);color:var(--pink-dark);padding:0.25rem 0.7rem}
     .sched-address{display:block;margin-top:0.4rem;font-size:1.2rem;color:var(--mid);font-style:italic;line-height:1.6}
     #schedule .section-inner {
@@ -230,7 +231,7 @@
     #dresscode{background:linear-gradient(135deg,var(--sky-pale) 0%,var(--pink-light) 100%);text-align:center}
     #dresscode .section-inner{max-width:560px}
     .dress-chips{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:2rem}
-    .dress-chip{padding:0.55rem 1.4rem;border:1px solid rgba(90,158,196,0.35);font-size:1.2rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--sky-dark);background:rgba(255,255,255,0.55)}
+    .dress-chip{padding:0.55rem 1.4rem;border:1px solid rgba(90,158,196,0.35);font-size:0.9rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--sky-dark);background:rgba(255,255,255,0.55)}
 
     /* RSVP */
     #rsvp{background:var(--white);text-align:center}
@@ -239,21 +240,21 @@
     .rsvp-form{display:flex;flex-direction:column;gap:1rem;text-align:left}
     .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
     .form-group{display:flex;flex-direction:column;gap:0.4rem}
-    .form-group label{font-size:1.2rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid)}
-    .form-group input,.form-group select,.form-group textarea{background:var(--off-white);border:1px solid var(--sky-light);padding:0.8rem 1rem;font-family:var(--sans);font-size:1.2rem;color:var(--charcoal);outline:none;transition:border-color 0.3s;width:100%;-webkit-appearance:none}
+    .form-group label{font-size:1.0rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid)}
+    .form-group input,.form-group select,.form-group textarea{background:var(--off-white);border:1px solid var(--sky-light);padding:0.8rem 1rem;font-family:var(--sans);font-size:0.9rem;color:var(--charcoal);outline:none;transition:border-color 0.3s;width:100%;-webkit-appearance:none}
     .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--sky-dark)}
     .form-group textarea{resize:vertical;min-height:85px}
-    .btn-submit{background:var(--sky-dark);color:#fff;border:none;padding:1rem 3rem;font-family:var(--sans);font-size:1.2rem;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;transition:background 0.3s;align-self:center}
+    .btn-submit{background:var(--sky-dark);color:#fff;border:none;padding:1rem 3rem;font-family:var(--sans);font-size:1.0rem;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;transition:background 0.3s;align-self:center}
     .btn-submit:hover{background:var(--sky)}
 
     /* FOOTER */
-    footer{background:var(--charcoal);color:rgba(255,255,255,0.4);text-align:center;padding:3.5rem 2rem;font-size:1.2rem;letter-spacing:0.12em}
+    footer{background:var(--charcoal);color:rgba(255,255,255,0.4);text-align:center;padding:3.5rem 2rem;font-size:0.9rem;letter-spacing:0.12em}
     .footer-names{font-family:var(--serif);font-size:2.2rem;font-weight:300;color:rgba(255,255,255,0.88);margin-bottom:0.5rem}
     .footer-names em{font-style:italic;color:var(--pink)}
     .footer-rule{width:60px;height:1px;background:linear-gradient(to right,var(--sky),var(--pink));margin:1.2rem auto}
 
     @media(max-width:660px){
-      nav{gap:1.4rem;font-size:1.2rem}
+      nav{gap:1.4rem;font-size:0.9rem}
       .story-grid{grid-template-columns:1fr}
       .form-row{grid-template-columns:1fr}
       .schedule-item{grid-template-columns:1fr;gap:0.3rem}
@@ -454,7 +455,7 @@
   <p class="footer-names">Steven Vũ <em>&amp;</em> Anh Thư</p>
   <div class="footer-rule"></div>
   <p>October 10, 2026 &nbsp;·&nbsp; Hoa Vien Kim Bich, Đồng Nai, Vietnam</p>
-  <p style="margin-top:0.6rem">Made with love and HTML</p>
+  <p style="margin-top:0.6rem">made with love and matcha latte</p>
 </footer>
 
 <script>
@@ -469,6 +470,7 @@
   let current = 0;
   let timer;
 
+  // Create dot indicators
   slides.forEach((_, i) => {
     const dot = document.createElement('button');
     dot.classList.add('carousel-dot');
@@ -482,6 +484,7 @@
 
   const dots = document.querySelectorAll('.carousel-dot');
 
+  // Simple transition: just fade opacity
   function goTo(index) {
     const nextIndex = (index + slides.length) % slides.length;
     
@@ -496,6 +499,7 @@
     current = nextIndex;
   }
 
+  // Setup images on load
   window.addEventListener('load', () => {
     slides.forEach((slide) => {
       const img = slide.querySelector('img');
@@ -520,7 +524,7 @@
   function startAuto() {
     timer = setInterval(() => {
       goTo(current + 1);
-    }, 8000);
+    }, 8000); // 8 seconds per slide (matches animation duration)
   }
 
   function resetAuto() {
@@ -530,8 +534,10 @@
 
   startAuto();
 
+  // Pause/resume on hover
   const carousel = document.querySelector('.carousel');
 
+  // Touch swipe
   let startX = 0;
   carousel.addEventListener('touchstart', e => {
     startX = e.touches[0].clientX;
