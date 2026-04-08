@@ -1011,28 +1011,28 @@
     <div class="carousel-track" id="carouselTrack">
 
       <div class="carousel-slide active">
-        <img src="image0.jpg" alt="Photo 1" data-focus="center">
+        <img src="images/image0.jpg" alt="Photo 1" data-focus="center">
       </div>
       <div class="carousel-slide">
-        <img src="image1.jpg" alt="Photo 2" data-focus="center">
+        <img src="images/image1.jpg" alt="Photo 2" data-focus="center">
       </div>
       <div class="carousel-slide">
-        <img src="image2.jpg" alt="Photo 3" data-focus="center">
+        <img src="images/image2.jpg" alt="Photo 3" data-focus="center">
       </div>
       <div class="carousel-slide">
-        <img src="image3.jpg" alt="Photo 4" data-focus="center">
+        <img src="images/image3.jpg" alt="Photo 4" data-focus="center">
       </div>
       <div class="carousel-slide">
-        <img src="image5.jpg" alt="Photo 5" data-focus="center">
+        <img src="images/image4.jpg" alt="Photo 5" data-focus="center">
       </div>
       <div class="carousel-slide">
-        <img src="image5.jpg" alt="Photo 6" data-focus="center">
+        <img src="images/image5.jpg" alt="Photo 6" data-focus="center">
       </div>
       <div class="carousel-slide">
-        <img src="image6.jpg" alt="Photo 7" data-focus="center">
+        <img src="images/image6.jpg" alt="Photo 7" data-focus="center">
       </div>
       <div class="carousel-slide">
-        <img src="image7.jpg" alt="Photo 8" data-focus="center">
+        <img src="images/image7.jpg" alt="Photo 8" data-focus="center">
       </div>
 
     </div>
@@ -1204,9 +1204,9 @@
   <p style="margin-top:0.8rem">made with love and matcha latte</p>
 </footer>
 
-<!-- MUSIC ELEMENTS WITH MUSIC NOTE ICON -->
+<!-- MUSIC ELEMENTS WITH MUSIC NOTE ICON AND RANDOM SONG SELECTION -->
 <audio id="bgMusic" loop preload="auto">
-  <source src="./music.mp3" type="audio/mpeg">
+  <source src="" id="musicSource">
   Your browser does not support the audio element.
 </audio>
 
@@ -1306,21 +1306,55 @@
   }
 
   // ============================================
-  // MUSIC BUTTON WITH MUSIC NOTE ICON
+  // MUSIC BUTTON WITH RANDOM SONG SELECTION
   // ============================================
+  
+  // List of available music files in the music folder
+  const musicFiles = [
+    'music/song1.mp3',
+    'music/song2.mp3',
+    'music/song3.mp3',
+    'music/song4.mp3',
+    'music/song5.mp3'
+  ];
+  
+  // Function to get random music file
+  function getRandomMusic() {
+    const randomIndex = Math.floor(Math.random() * musicFiles.length);
+    return musicFiles[randomIndex];
+  }
+  
   document.addEventListener('DOMContentLoaded', function() {
     const music = document.getElementById('bgMusic');
     const musicBtn = document.getElementById('musicBtn');
     const musicIcon = document.querySelector('.icon-music');
     const pauseIcon = document.querySelector('.icon-pause');
+    const musicSource = document.getElementById('musicSource');
     let isPlaying = false;
     let currentRotation = 0;
+    let currentSong = null;
     
     if (music && musicBtn) {
       music.volume = 0.3;
       
+      // Set initial random song
+      function loadRandomSong() {
+        const newSong = getRandomMusic();
+        currentSong = newSong;
+        musicSource.src = currentSong;
+        music.load();
+        console.log('Loaded song:', currentSong);
+      }
+      
+      // Load first random song
+      loadRandomSong();
+      
       musicBtn.addEventListener('click', function() {
         if (!isPlaying) {
+          // Load a new random song if one isn't loaded or if we want fresh each time
+          // Uncomment the line below if you want a NEW random song EVERY time you play
+          // loadRandomSong();
+          
           // Play music
           music.play().then(() => {
             musicBtn.classList.add('playing');
@@ -1353,6 +1387,14 @@
             musicIcon.style.transform = `translate(-50%, -50%) rotate(${currentRotation}deg)`;
           }
           isPlaying = false;
+        }
+      });
+      
+      // Optional: Load a new random song when the current one ends
+      music.addEventListener('ended', function() {
+        loadRandomSong();
+        if (isPlaying) {
+          music.play().catch(error => console.log('Auto-play error:', error));
         }
       });
     }
