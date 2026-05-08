@@ -8,6 +8,25 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Playfair+Display:wght@300;400;500&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* Additional inline fixes for hero mobile – ensures the image top is visible */
+    @media (max-width: 768px) {
+      #hero {
+        background-position: top center !important;
+        background-size: cover !important;
+        background-attachment: scroll !important;
+      }
+    }
+    /* Active state for shuffle/loop buttons (already in style.css, but double‑safe) */
+    .control-btn.active {
+      color: var(--rose-deep);
+      background: rgba(196, 87, 107, 0.15);
+      transform: scale(1.05);
+    }
+    .control-btn.active svg {
+      fill: var(--rose-deep);
+    }
+  </style>
 </head>
 <body>
 
@@ -55,7 +74,6 @@
     <p class="section-label">Our Story</p>
     <h2 class="section-title">In their own <em>words</em></h2>
     <div class="story-grid">
-      <!-- Groom's quote card now also has "pink-top" class to match bride's style -->
       <div class="quote-card pink-top">
         <span class="quote-mark">"</span>
         <p class="quote-text">I knew Thu was the one for me when I realized I wasn't pretending to be someone else or only revealing fragments of who I am. I found someone I could be completely genuine with, in every thought, in every feeling, and in every small action - even in moments of doubt or imperfection. Being with her, I felt like all the scattered parts of my heart and my life came together, like finding the one piece that completes a puzzle I didn't even know was incomplete. I realized that being loved by her wasn't enough; I wanted to give her all of me, to protect her, support her, and share everything that I am.</p>
@@ -206,7 +224,7 @@
     createLeafSVG() {
       const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
       svg.setAttribute('viewBox', '0 0 100 100');
-      const colors = ['#d97b8b', '#c4576b', '#b84d63', '#a63d55', '#e07a8f'];
+      const colors = ['#d97b8b', '#c4576b', '#b84d63', '#a63d55', '#e07a8f', '#8fbc8f', '#6b8e6b', '#a3c9a3', '#7d9e7d', '#5c8a5c', '#c3a5d4', '#b38fcc', '#9b7bb5', '#aa8cce', '#d1bdf0'];
       const color = colors[Math.floor(Math.random() * colors.length)];
       const leaf = document.createElementNS('http://www.w3.org/2000/svg', 'path');
       leaf.setAttribute('d', 'M50 10 C80 20, 85 60, 50 90 C15 60, 20 20, 50 10 Z');
@@ -238,7 +256,7 @@
   document.addEventListener('visibilitychange', () => { document.hidden ? (stopPetalCreation(), isTabActive=false) : (isTabActive=true, startPetalCreation()); });
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initPetals); else initPetals();
 
-  // === CAROUSEL (with touch swipe + portrait detection) ===
+  // === CAROUSEL (touch swipe + portrait detection) ===
   const slides = document.querySelectorAll('.carousel-slide');
   const dotsContainer = document.getElementById('carouselDots');
   let current = 0, timer;
@@ -264,7 +282,7 @@
   function resetAuto() { clearInterval(timer); startAuto(); }
   startAuto();
 
-  // Touch swipe support
+  // Touch swipe
   const carousel = document.querySelector('.carousel');
   let startX = 0;
   if (carousel) {
@@ -278,7 +296,7 @@
     });
   }
 
-  // Portrait detection & object-position
+  // Portrait detection
   window.addEventListener('load', () => {
     slides.forEach((slide) => {
       const img = slide.querySelector('img');
@@ -310,7 +328,7 @@
   window.addEventListener('scroll', () => { if (!ticking) { requestAnimationFrame(updateActiveNav); ticking = true; } });
   updateActiveNav();
 
-  // === MUSIC PLAYER ===
+  // === MUSIC PLAYER (working shuffle/loop active states) ===
   const musicFiles = [
     'music/leehi - only.mp3',
     'music/mashup lễ Đường x một dời mobuds ft wenne.mp3',
@@ -323,51 +341,270 @@
   ];
   let audio = document.getElementById('bgMusic');
   let playlist = [...musicFiles];
-  let currentIndex = 0, isShuffled = false, isLooping = true, isPlaying = false, isLoading = false, pendingIndex = null;
-  function getSongName(path) { return path.split('/').pop().replace('.mp3', '').replace(/-/g, ' ').replace(/_/g, ' '); }
-  function updateNowPlaying() { document.getElementById('currentSongName').textContent = getSongName(playlist[currentIndex]); }
-  function updatePlayPauseUI() { const btn = document.getElementById('playPauseBtn'); if(!btn)return; const iconPlay=btn.querySelector('.icon-play'),iconPause=btn.querySelector('.icon-pause');if(isPlaying){btn.classList.add('playing');if(iconPlay)iconPlay.style.display='none';if(iconPause)iconPause.style.display='block';}else{btn.classList.remove('playing');if(iconPlay)iconPlay.style.display='block';if(iconPause)iconPause.style.display='none';} }
-  async function _loadAndPlay(index, autoPlay=true) {
-    if(loadTimeout)clearTimeout(loadTimeout);
-    isLoading=true; if(!audio.paused)audio.pause();
-    currentIndex=(index+playlist.length)%playlist.length;
-    audio.src=playlist[currentIndex];
-    updateNowPlaying();
-    try{ await Promise.race([new Promise((resolve,reject)=>{ const onLoad=()=>{cleanup();resolve();}; const onError=()=>{cleanup();reject(new Error('Load failed'));}; const cleanup=()=>{audio.removeEventListener('loadedmetadata',onLoad);audio.removeEventListener('error',onError);if(loadTimeout)clearTimeout(loadTimeout);}; audio.addEventListener('loadedmetadata',onLoad,{once:true}); audio.addEventListener('error',onError,{once:true}); loadTimeout=setTimeout(()=>{cleanup();reject(new Error('Load timeout'));},5000); })]); }catch(err){ console.warn(err); isLoading=false; if(pendingIndex!==null){ const next=pendingIndex; pendingIndex=null; _loadAndPlay(next,autoPlay); } return; }
-    if(pendingIndex!==null){ const next=pendingIndex; pendingIndex=null; isLoading=false; _loadAndPlay(next,autoPlay); return; }
-    if(autoPlay||isPlaying){ try{ await audio.play(); isPlaying=true; }catch(e){ isPlaying=false; } } else { isPlaying=false; }
-    isLoading=false; updatePlayPauseUI();
+  let currentIndex = 0;
+  let isShuffled = false;
+  let isLooping = false;
+  let isPlaying = false;
+  let isLoading = false;
+  let pendingIndex = null;
+  let loadTimeout = null;
+
+  function getSongName(path) {
+    return path.split('/').pop().replace('.mp3', '').replace(/-/g, ' ').replace(/_/g, ' ');
   }
-  function loadAndPlay(index, autoPlay=true){ if(isLoading){ pendingIndex=index; return; } _loadAndPlay(index,autoPlay); }
-  function playPause(){ if(isLoading)return; if(isPlaying){ audio.pause(); isPlaying=false; updatePlayPauseUI(); } else { audio.play().then(()=>{ isPlaying=true; updatePlayPauseUI(); }).catch(e=>console.warn(e)); } }
-  function nextTrack(){ if(isLoading){ let next=currentIndex+1; if(next>=playlist.length){if(!isLooping)return;next=0;} pendingIndex=next; return; } let next=currentIndex+1; if(next>=playlist.length){if(!isLooping)return;next=0;} loadAndPlay(next,true); }
-  function prevTrack(){ if(isLoading){ let prev=currentIndex-1; if(prev<0)prev=playlist.length-1; pendingIndex=prev; return; } let prev=currentIndex-1; if(prev<0)prev=playlist.length-1; loadAndPlay(prev,true); }
-  function toggleShuffle(){ if(isShuffled){ const currentSong=playlist[currentIndex]; playlist=[...musicFiles]; const newIndex=playlist.findIndex(s=>s===currentSong); currentIndex=newIndex!==-1?newIndex:0; isShuffled=false; } else { const currentSong=playlist[currentIndex]; let shuffled=[...musicFiles]; for(let i=shuffled.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [shuffled[i],shuffled[j]]=[shuffled[j],shuffled[i]]; } const idx=shuffled.findIndex(s=>s===currentSong); if(idx!==-1)[shuffled[currentIndex],shuffled[idx]]=[shuffled[idx],shuffled[currentIndex]]; else shuffled[currentIndex]=currentSong; playlist=shuffled; isShuffled=true; } updateNowPlaying(); updateShuffleLoopUI(); }
-  function toggleLoop(){ isLooping=!isLooping; updateShuffleLoopUI(); }
-  function updateShuffleLoopUI(){ document.getElementById('shuffleBtn')?.classList.toggle('active', isShuffled); document.getElementById('loopBtn')?.classList.toggle('active', isLooping); }
-  let loadTimeout=null;
-  document.addEventListener('DOMContentLoaded',()=>{
-    audio.volume=0.3; loadAndPlay(0,false);
-    document.getElementById('playPauseBtn')?.addEventListener('click',playPause);
-    document.getElementById('nextBtn')?.addEventListener('click',nextTrack);
-    document.getElementById('prevBtn')?.addEventListener('click',prevTrack);
-    document.getElementById('shuffleBtn')?.addEventListener('click',toggleShuffle);
-    document.getElementById('loopBtn')?.addEventListener('click',toggleLoop);
-    const progressSlider=document.getElementById('progressSlider'), currentTimeEl=document.getElementById('currentTime'), durationEl=document.getElementById('duration');
-    function formatTime(sec){ if(isNaN(sec)||!isFinite(sec))return'0:00'; const m=Math.floor(sec/60), s=Math.floor(sec%60); return m+':'+(s<10?'0':'')+s; }
-    audio.addEventListener('loadedmetadata',()=>{ if(durationEl)durationEl.textContent=formatTime(audio.duration); if(progressSlider){ progressSlider.max=audio.duration; progressSlider.value=0; } });
-    audio.addEventListener('timeupdate',()=>{ if(progressSlider && !progressSlider.matches(':active')){ progressSlider.value=audio.currentTime; } if(currentTimeEl)currentTimeEl.textContent=formatTime(audio.currentTime); });
-    if(progressSlider) progressSlider.addEventListener('input',function(){ audio.currentTime=this.value; });
-    audio.addEventListener('ended',()=>{ if(isLooping) nextTrack(); else { isPlaying=false; updatePlayPauseUI(); } });
-    const volumeSlider=document.getElementById('volumeSlider'), volumeIcon=document.getElementById('volumeIcon');
-    if(volumeSlider){ volumeSlider.value=30; audio.volume=0.3; volumeSlider.addEventListener('input',()=>{ audio.volume=volumeSlider.value/100; }); if(volumeIcon) volumeIcon.addEventListener('click',()=>{ if(audio.volume>0){ audio.volume=0; volumeSlider.value=0; } else { audio.volume=0.3; volumeSlider.value=30; } }); }
-    updateShuffleLoopUI(); updateNowPlaying();
+  function updateNowPlaying() {
+    const span = document.getElementById('currentSongName');
+    if (span) span.textContent = getSongName(playlist[currentIndex]);
+  }
+  function updatePlayPauseUI() {
+    const btn = document.getElementById('playPauseBtn');
+    if (!btn) return;
+    const iconPlay = btn.querySelector('.icon-play');
+    const iconPause = btn.querySelector('.icon-pause');
+    if (isPlaying) {
+      btn.classList.add('playing');
+      if (iconPlay) iconPlay.style.display = 'none';
+      if (iconPause) iconPause.style.display = 'block';
+    } else {
+      btn.classList.remove('playing');
+      if (iconPlay) iconPlay.style.display = 'block';
+      if (iconPause) iconPause.style.display = 'none';
+    }
+  }
+  function updateShuffleLoopUI() {
+    const shuffleBtn = document.getElementById('shuffleBtn');
+    const loopBtn = document.getElementById('loopBtn');
+    if (shuffleBtn) {
+      if (isShuffled) shuffleBtn.classList.add('active');
+      else shuffleBtn.classList.remove('active');
+    }
+    if (loopBtn) {
+      if (isLooping) loopBtn.classList.add('active');
+      else loopBtn.classList.remove('active');
+    }
+  }
+  async function _loadAndPlay(index, autoPlay = true) {
+    if (loadTimeout) clearTimeout(loadTimeout);
+    isLoading = true;
+    if (!audio.paused) audio.pause();
+    currentIndex = (index + playlist.length) % playlist.length;
+    audio.src = playlist[currentIndex];
+    updateNowPlaying();
+    try {
+      await Promise.race([
+        new Promise((resolve, reject) => {
+          const onLoad = () => { cleanup(); resolve(); };
+          const onError = () => { cleanup(); reject(new Error('Load failed')); };
+          const cleanup = () => {
+            audio.removeEventListener('loadedmetadata', onLoad);
+            audio.removeEventListener('error', onError);
+            if (loadTimeout) clearTimeout(loadTimeout);
+          };
+          audio.addEventListener('loadedmetadata', onLoad, { once: true });
+          audio.addEventListener('error', onError, { once: true });
+          loadTimeout = setTimeout(() => { cleanup(); reject(new Error('Load timeout')); }, 5000);
+        })
+      ]);
+    } catch (err) {
+      console.warn('Audio load error:', err);
+      isLoading = false;
+      if (pendingIndex !== null) {
+        const next = pendingIndex;
+        pendingIndex = null;
+        _loadAndPlay(next, autoPlay);
+      }
+      return;
+    }
+    if (pendingIndex !== null) {
+      const next = pendingIndex;
+      pendingIndex = null;
+      isLoading = false;
+      _loadAndPlay(next, autoPlay);
+      return;
+    }
+    if (autoPlay || isPlaying) {
+      try {
+        await audio.play();
+        isPlaying = true;
+      } catch (e) {
+        isPlaying = false;
+      }
+    } else {
+      isPlaying = false;
+    }
+    isLoading = false;
+    updatePlayPauseUI();
+  }
+  function loadAndPlay(index, autoPlay = true) {
+    if (isLoading) {
+      pendingIndex = index;
+      return;
+    }
+    _loadAndPlay(index, autoPlay);
+  }
+  function playPause() {
+    if (isLoading) return;
+    if (isPlaying) {
+      audio.pause();
+      isPlaying = false;
+      updatePlayPauseUI();
+    } else {
+      audio.play().then(() => {
+        isPlaying = true;
+        updatePlayPauseUI();
+      }).catch(e => console.warn(e));
+    }
+  }
+  function nextTrack() {
+    if (isLoading) {
+      let next = currentIndex + 1;
+      if (next >= playlist.length) { if (!isLooping) return; next = 0; }
+      pendingIndex = next;
+      return;
+    }
+    let next = currentIndex + 1;
+    if (next >= playlist.length) { if (!isLooping) return; next = 0; }
+    loadAndPlay(next, true);
+  }
+  function prevTrack() {
+    if (isLoading) {
+      let prev = currentIndex - 1;
+      if (prev < 0) prev = playlist.length - 1;
+      pendingIndex = prev;
+      return;
+    }
+    let prev = currentIndex - 1;
+    if (prev < 0) prev = playlist.length - 1;
+    loadAndPlay(prev, true);
+  }
+  function toggleShuffle() {
+    if (isShuffled) {
+      const currentSong = playlist[currentIndex];
+      playlist = [...musicFiles];
+      const newIndex = playlist.findIndex(s => s === currentSong);
+      currentIndex = newIndex !== -1 ? newIndex : 0;
+      isShuffled = false;
+    } else {
+      const currentSong = playlist[currentIndex];
+      let shuffled = [...musicFiles];
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      const idx = shuffled.findIndex(s => s === currentSong);
+      if (idx !== -1) [shuffled[currentIndex], shuffled[idx]] = [shuffled[idx], shuffled[currentIndex]];
+      else shuffled[currentIndex] = currentSong;
+      playlist = shuffled;
+      isShuffled = true;
+    }
+    updateNowPlaying();
+    updateShuffleLoopUI();
+  }
+  function toggleLoop() {
+    isLooping = !isLooping;
+    updateShuffleLoopUI();
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    audio.volume = 0.3;
+    loadAndPlay(0, false);
+
+    document.getElementById('playPauseBtn')?.addEventListener('click', playPause);
+    document.getElementById('nextBtn')?.addEventListener('click', nextTrack);
+    document.getElementById('prevBtn')?.addEventListener('click', prevTrack);
+    document.getElementById('shuffleBtn')?.addEventListener('click', toggleShuffle);
+    document.getElementById('loopBtn')?.addEventListener('click', toggleLoop);
+
+    const progressSlider = document.getElementById('progressSlider');
+    const currentTimeEl = document.getElementById('currentTime');
+    const durationEl = document.getElementById('duration');
+
+    function formatTime(sec) {
+      if (isNaN(sec) || !isFinite(sec)) return '0:00';
+      const m = Math.floor(sec / 60);
+      const s = Math.floor(sec % 60);
+      return `${m}:${s < 10 ? '0' : ''}${s}`;
+    }
+
+    audio.addEventListener('loadedmetadata', () => {
+      if (durationEl) durationEl.textContent = formatTime(audio.duration);
+      if (progressSlider) {
+        progressSlider.max = audio.duration;
+        progressSlider.value = 0;
+      }
+    });
+
+    audio.addEventListener('timeupdate', () => {
+      if (progressSlider && !progressSlider.matches(':active')) {
+        progressSlider.value = audio.currentTime;
+      }
+      if (currentTimeEl) currentTimeEl.textContent = formatTime(audio.currentTime);
+    });
+
+    if (progressSlider) {
+      progressSlider.addEventListener('input', function () {
+        audio.currentTime = this.value;
+      });
+    }
+
+    audio.addEventListener('ended', () => {
+      if (isLooping) nextTrack();
+      else {
+        isPlaying = false;
+        updatePlayPauseUI();
+      }
+    });
+
+    const volumeSlider = document.getElementById('volumeSlider');
+    const volumeIcon = document.getElementById('volumeIcon');
+    if (volumeSlider) {
+      volumeSlider.value = 30;
+      audio.volume = 0.3;
+      volumeSlider.addEventListener('input', () => {
+        audio.volume = volumeSlider.value / 100;
+      });
+      if (volumeIcon) {
+        volumeIcon.addEventListener('click', () => {
+          if (audio.volume > 0) {
+            audio.volume = 0;
+            volumeSlider.value = 0;
+          } else {
+            audio.volume = 0.3;
+            volumeSlider.value = 30;
+          }
+        });
+      }
+    }
+
+    updateShuffleLoopUI();
+    updateNowPlaying();
   });
-  const musicDiv=document.getElementById('musicControls'), minimizeBtn=document.getElementById('minimizeBtn');
-  if(minimizeBtn&&musicDiv) minimizeBtn.addEventListener('click',()=>{ musicDiv.classList.toggle('minimized'); minimizeBtn.textContent=musicDiv.classList.contains('minimized')?'+':'−'; });
-  function checkBottom(){ const atBottom=(window.scrollY+window.innerHeight)>=document.documentElement.scrollHeight-10; musicDiv.classList.toggle('hide-at-bottom',atBottom); }
-  window.addEventListener('scroll',checkBottom); window.addEventListener('resize',checkBottom); checkBottom();
-  new IntersectionObserver((entries)=>{ entries.forEach(e=>{ e.isIntersecting?musicDiv.classList.remove('visible'):musicDiv.classList.add('visible'); }); },{threshold:0.3}).observe(document.getElementById('hero'));
+
+  // Music player visibility & minimize
+  const musicDiv = document.getElementById('musicControls');
+  const minimizeBtn = document.getElementById('minimizeBtn');
+  if (minimizeBtn && musicDiv) {
+    minimizeBtn.addEventListener('click', () => {
+      musicDiv.classList.toggle('minimized');
+      minimizeBtn.textContent = musicDiv.classList.contains('minimized') ? '+' : '−';
+    });
+  }
+  function checkBottom() {
+    const atBottom = (window.scrollY + window.innerHeight) >= document.documentElement.scrollHeight - 10;
+    if (musicDiv) musicDiv.classList.toggle('hide-at-bottom', atBottom);
+  }
+  window.addEventListener('scroll', checkBottom);
+  window.addEventListener('resize', checkBottom);
+  checkBottom();
+
+  // Show music player after hero is scrolled past
+  new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (musicDiv) {
+        e.isIntersecting ? musicDiv.classList.remove('visible') : musicDiv.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.3 }).observe(document.getElementById('hero'));
 </script>
 </body>
 </html>
